@@ -1,8 +1,8 @@
 # sky-scroll
-> An vanilla JS engine for scroll based events.
+> A vanilla JS library for scroll based events.
 
 ## Description
-Lightweight library providing one single api for handling scroll events as well as tracking the positions and dimensions of multiple elements on scroll (with recalculations on resize).
+Lightweight JavaScript (es2015) library providing one single api for handling scroll events as well as tracking the positions and dimensions of multiple elements on scroll (with recalculations on resize).
 
 ## Usage
 Import sky-scroll in your project. Recommed implementation (used as base for this readme) is:
