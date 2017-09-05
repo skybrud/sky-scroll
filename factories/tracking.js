@@ -1,4 +1,5 @@
-import { trackList, viewport } from './globals';
+import { trackList } from './globals';
+import { viewport } from './viewport';
 import Dimensions from './dimensions';
 import Events from './events';
 

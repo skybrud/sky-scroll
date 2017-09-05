@@ -1,4 +1,5 @@
-import { trackList, viewport } from './globals';
+import { trackList } from './globals';
+import { viewport } from './viewport';
 
 /**
  * Helper factory delivering the user scrolled distance of an element.
