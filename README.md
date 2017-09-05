@@ -21,6 +21,7 @@ The following paragraphs will take you through the diffenrent ways to use sky-sc
 
 ### .on()
 `SkyScroll.on(callback, config[optional])`
+
 Execute a callback function on every scroll. By calling `SkyScroll.on(...)` multiple times more callbacks can be added (executed on the same scroll event under the hood).
 ```JS
 SkyScroll.on((scrolled, dimensions, viewport) => {
@@ -33,6 +34,7 @@ _Note: This method uses `track(document.body)` behind the scenes, so it shares t
 
 ### .off()
 `SkyScroll.off(callback[optional])`
+
 Remove all callbacks added by `on()` or just a specific callback if the function is provided.
 ```JS
 SkyScroll.off(); // removes all callbacks
@@ -41,6 +43,7 @@ SkyScroll.off(specificCallback); // removes specificCallback only
 
 ### .track()
 `SkyScroll.track(element, callback, config[optional])`
+
 Track a specific element. After the callback a config object can be provided with the following methods:
 ```JS
 SkyScroll.track(
@@ -67,6 +70,7 @@ SkyScroll.track(
 
 ### .untrack()
 `SkyScroll.untrack(element, callback[optional])`
+
 Counterpart to `SkyScroll.track`. Removes all or one callback on a specific element.
 ```JS
 SkyScroll.untrack(element); // removes all callbacks on element
@@ -89,6 +93,7 @@ SkyScroll.redraw();
 
 ### .setContainer()
 `SkyScroll.setContainer(element)`
+
 In rare instances your page might not be scrolling inside `body` in the traditional sense, but rather inside a `div` with `overflow-y: scroll;` or similar. Using this method you can reassign the scroll event to a DOM element instead of `window`. For instance, this can be useful for pages using [this performant parallaxing method](https://developers.google.com/web/updates/2016/12/performant-parallaxing) using only CSS.
 ```JS
 SkyScroll.setContainer(element);
