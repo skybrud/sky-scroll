@@ -15,7 +15,7 @@ sky-scroll provides 7 methods that can be used:
 - [untrack](#untrack)
 - [recalculate](#recalculate)
 - [redraw](#redraw)
-- [setContainer](#setContainer)
+- [setContainer](#setcontainer)
 
 The following paragraphs will take you through the diffenrent ways to use sky-scroll.
 
