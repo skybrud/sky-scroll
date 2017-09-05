@@ -24,7 +24,7 @@ const calculateScrolled = (dimensions, view) => {
  * @return {boolean} deciding if an element should be redrawn.
  */
 const shouldRedraw = (rect, view) => {
-	const elementTopOverWindowBottom = (rect.top - view.scroll.y) < 0;
+	const elementTopOverWindowBottom = (rect.top - view.scroll.y) <= 0;
 	const elementBottomOverWindowTop = (rect.bottom + view.dimensions.height - view.scroll.y) > 0;
 
 	return elementTopOverWindowBottom && elementBottomOverWindowTop;
