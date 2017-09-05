@@ -20,7 +20,7 @@ sky-scroll provides 7 methods that can be used:
 The following paragraphs will take you through the diffenrent ways to use sky-scroll.
 
 ### .on()
-`SkyScroll.on(callback, config[optional])`
+`SkyScroll.on(callback)`
 
 Execute a callback function on every scroll. By calling `SkyScroll.on(...)` multiple times more callbacks can be added (executed on the same scroll event under the hood).
 ```JS
@@ -28,9 +28,8 @@ SkyScroll.on((scrolled, dimensions, viewport) => {
     // scrolled: distance the page has scrolled
     // dimensions: dimensions of document.body
     // viewport: window information - scroll along X or Y axis + window dimensions
-}, configObject);
+});
 ```
-_Note: This method uses `track(document.body)` behind the scenes, so it shares the same api. Refer to `track()` for documentation on config object._
 
 ### .off()
 `SkyScroll.off(callback[optional])`
