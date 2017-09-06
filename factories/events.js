@@ -32,7 +32,6 @@ if (!isServer) {
 			}
 
 			Recalculate();
-			Redraw();
 		},
 	});
 }
