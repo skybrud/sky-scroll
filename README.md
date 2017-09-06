@@ -11,13 +11,13 @@ import SkyScroll from 'sky-scroll';
 ```
 
 SkyScroll provides 7 methods that can be used:
-- [`on()](#on)
-- [`off()](#off)
-- [`track()](#track)
-- [`untrack()](#untrack)
-- [`recalculate()](#recalculate)
-- [`redraw()](#redraw)
-- [`setContainer()](#setcontainer)
+- [`on()`](#on)
+- [`off()`](#off)
+- [`track()`](#track)
+- [`untrack()`](#untrack)
+- [`recalculate()`](#recalculate)
+- [`redraw()`](#redraw)
+- [`setContainer()`](#setcontainer)
 
 ### .on()
 `SkyScroll.on(callback)`
