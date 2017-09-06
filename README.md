@@ -6,7 +6,9 @@ Lightweight JavaScript (es2015) library providing one single api for handling sc
 
 ## Usage
 Import SkyScroll in your project. Recommed implementation (used as base for this readme) is:
-`import SkyScroll from 'SkyScroll';`
+```JS
+import SkyScroll from 'sky-scroll';
+```
 
 SkyScroll provides 7 methods that can be used:
 - [`on()](#on)
