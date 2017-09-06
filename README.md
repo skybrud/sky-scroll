@@ -1,23 +1,21 @@
-# sky-scroll
+# SkyScroll
 > A vanilla JS library for scroll based events.
 
 ## Description
 Lightweight JavaScript (es2015) library providing one single api for handling scroll events as well as tracking the positions and dimensions of multiple elements on scroll (with recalculations on resize).
 
 ## Usage
-Import sky-scroll in your project. Recommed implementation (used as base for this readme) is:
-`import SkyScroll from 'sky-scroll';`
+Import SkyScroll in your project. Recommed implementation (used as base for this readme) is:
+`import SkyScroll from 'SkyScroll';`
 
-sky-scroll provides 7 methods that can be used:
-- [on](#on)
-- [off](#off)
-- [track](#track)
-- [untrack](#untrack)
-- [recalculate](#recalculate)
-- [redraw](#redraw)
-- [setContainer](#setcontainer)
-
-The following paragraphs will take you through the diffenrent ways to use sky-scroll.
+SkyScroll provides 7 methods that can be used:
+- [`on()](#on)
+- [`off()](#off)
+- [`track()](#track)
+- [`untrack()](#untrack)
+- [`recalculate()](#recalculate)
+- [`redraw()](#redraw)
+- [`setContainer()](#setcontainer)
 
 ### .on()
 `SkyScroll.on(callback)`
