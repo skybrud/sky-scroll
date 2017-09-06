@@ -8,16 +8,16 @@ Lightweight JavaScript (es2015) library providing one single api for handling sc
 Import SkyScroll in your project. Recommed implementation (used as base for this readme) is:
 ```JS
 import SkyScroll from 'sky-scroll';
-```
+``
 
 SkyScroll provides 7 methods that can be used:
-- [`on()](#on)
-- [`off()](#off)
-- [`track()](#track)
-- [`untrack()](#untrack)
-- [`recalculate()](#recalculate)
-- [`redraw()](#redraw)
-- [`setContainer()](#setcontainer)
+- [`on()`](#on)
+- [`off()`](#off)
+- [`track()`](#track)
+- [`untrack()`](#untrack)
+- [`recalculate()`](#recalculate)
+- [`redraw()`](#redraw)
+- [`setContainer()`](#setcontainer)
 
 ### .on()
 `SkyScroll.on(callback)`
