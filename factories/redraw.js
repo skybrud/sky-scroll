@@ -34,19 +34,21 @@ const shouldRedraw = (rect, view) => {
  * Function initiating tracked elements callback and exposing
  * needed parameters if their condition(s) are met.
  */
-export default () => {
+export default (forceAll = false) => {
 	for (let i = trackList.length - 1; i >= 0; i--) {
 		const item = trackList[i];
-		let initiateCallback = false;
+		let initiateCallback = Boolean(forceAll);
 
-		if (typeof item.config.shouldRedraw !== 'undefined') {
-			if (typeof item.config.shouldRedraw === 'function') {
-				initiateCallback = item.config.shouldRedraw(item.dimensions, viewport);
+		if (!forceAll) {
+			if (typeof item.config.shouldRedraw !== 'undefined') {
+				if (typeof item.config.shouldRedraw === 'function') {
+					initiateCallback = item.config.shouldRedraw(item.dimensions, viewport);
+				} else {
+					initiateCallback = Boolean(item.config.shouldRedraw);
+				}
 			} else {
-				initiateCallback = Boolean(item.config.shouldRedraw);
+				initiateCallback = shouldRedraw(item.dimensions, viewport);
 			}
-		} else {
-			initiateCallback = shouldRedraw(item.dimensions, viewport);
 		}
 
 		if (initiateCallback) {

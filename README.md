@@ -22,7 +22,7 @@ The following paragraphs will take you through the diffenrent ways to use sky-sc
 ### .on()
 `SkyScroll.on(callback)`
 
-Execute a callback function on every scroll. By calling `SkyScroll.on(...)` multiple times more callbacks can be added (executed on the same scroll event under the hood).
+Execute a callback function on every scroll. By calling `on()` multiple times multiple callbacks can be added (executed on the same scroll event under the hood).
 ```JS
 SkyScroll.on((scrolled, dimensions, viewport) => {
     // scrolled: distance the page has scrolled
@@ -34,7 +34,7 @@ SkyScroll.on((scrolled, dimensions, viewport) => {
 ### .off()
 `SkyScroll.off(callback[optional])`
 
-Remove all callbacks added by `on()` or just a specific callback if the function is provided.
+Remove all callbacks added by [`on()`](#on) or just a specific callback if the function is provided.
 ```JS
 SkyScroll.off(); // removes all callbacks
 SkyScroll.off(specificCallback); // removes specificCallback only
@@ -70,7 +70,7 @@ SkyScroll.track(
 ### .untrack()
 `SkyScroll.untrack(element, callback[optional])`
 
-Counterpart to `SkyScroll.track`. Removes all or one callback on a specific element.
+Counterpart to [`track()`](#track). Removes all or one callback on a specific element.
 ```JS
 SkyScroll.untrack(element); // removes all callbacks on element
 SkyScroll.untrack(element, specificCallback); // removes specificCallback only on parsed element
@@ -79,11 +79,11 @@ SkyScroll.untrack(element, specificCallback); // removes specificCallback only o
 ### .recalculate()
 `SkyScroll.recalculate(element[optional], immediate[optional])`
 
-Manually recalculate a specific or all elements currently hooked up to SkyScroll. This function will forcefully call `getBoundingClientRect` and recalculate the absolute position relative to the document top of all elements. `recalculate()` is useful in instances where you are changing the layout of the page elsewhere (accordions opening etc.) and want to recalculate all dimensions SkyScroll is currently tracking.
+Manually recalculate a specific or all elements currently hooked up to SkyScroll. This function will forcefully call `getBoundingClientRect` and recalculate the absolute position relative to the document top of all elements. This is useful in instances where you are changing the layout of the page elsewhere (accordions opening etc.) and want to recalculate all element dimensions SkyScroll is currently keeping track of.
 
-By default this method is throttled by requestAnimationFrame so multiple `recalculate()` calls aren't triggered on top of one another (=unescessary overhead). If you desire to recalculate immediately and not on the next tick, this behaviour can be overwritten by setting the `immediate` argument to `true`.
+To avoid unescessary overhead this method is throttled by requestAnimationFrame by default (so multiple recalculations aren't triggered simultaneously). If you desire to recalculate immediately and not on the next tick, this behaviour can be overwritten by parsing the `immediate` argument as `true`.
 
-When recalculations are done `redraw()` will be called automatically.
+This method finishes by triggering a forced redraw on all tracked elements (the equivalent of [`redraw(true)`](#redraw)).
 ```JS
 SkyScroll.recalculate(); // recalculates all elements - throttled by default
 SkyScroll.recalculate(element); // recalculates only a specific element;
@@ -91,9 +91,14 @@ SkyScroll.recalculate(null, true); // recalculates all elements unthrottled
 ```
 
 ### .redraw()
-Manually fire all callbacks bound to elements which conditions for a redraw have been met. By default this is executed on scroll and resize by default, which should cover most (if not all) use cases, but if you ever need to execute all callbacks manually this method is provided.
+`SkyScroll.redraw(forceAll[optional])`
+
+Manually fire all callbacks bound to elements which conditions for a redraw have been met. By default this is executed on scroll and resize (through [`recalculate()`](#recalculate)), which should cover most (if not all) use cases, but if you ever need to execute all callbacks manually this method is provided.
+
+By passing true as argument a redraw will be forced upon all elements, not just those that are in view. _Note that this type of redraw also bypasses `shouldRedraw` in configs of all tracked elements._
 ```JS
-SkyScroll.redraw();
+SkyScroll.redraw(); // redraw all elements in viewport - called on scroll by default
+SkyScroll.redraw(true); // redraw all elements regardless of visibility - called with recalculate() by default
 ```
 
 ### .setContainer()

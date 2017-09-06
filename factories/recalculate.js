@@ -17,7 +17,7 @@ const recalculateItems = (list, view) => {
 			item.element.getBoundingClientRect(),
 			view);
 	}
-	Redraw();
+	Redraw(true);
 };
 
 /**
