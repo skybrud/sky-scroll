@@ -76,12 +76,16 @@ SkyScroll.untrack(element); // removes all callbacks on element
 SkyScroll.untrack(element, specificCallback); // removes specificCallback only on parsed element
 ```
 
-### .recalculate()
-Manually recalculate all elements currently hooked up to SkyScroll. This function will forcefully call `getBoundingClientRect` and recalculate the absolute position relative to the document top of all elements. Useful for instances where you are changing the layout of the page elsewhere and want to recalculate everything (accordions opening etc.).
+### .recalculate(element[optional], immediate[optional])
+Manually recalculate a specific or all elements currently hooked up to SkyScroll. This function will forcefully call `getBoundingClientRect` and recalculate the absolute position relative to the document top of all elements. `recalculate()` is useful in instances where you are changing the layout of the page elsewhere (accordions opening etc.) and want to recalculate all dimensions SkyScroll is currently tracking.
+
+By default this method is throttled by requestAnimationFrame so multiple `recalculate()` calls aren't triggered on top of one another (=unescessary overhead). If you desire to recalculate immediately and not on the next tick, this behaviour can be overwritten by setting the `immediate` argument to `true`.
+
+When recalculations are done `redraw()` will be called automatically.
 ```JS
-SkyScroll.recalculate(); // recalculates every element throttled by requestAnimationFrame
-SkyScroll.recalculate(null, true); // recalculates every element unthrottled
-SkyScroll.recalculate(element); // recalculates only the specified element;
+SkyScroll.recalculate(); // recalculates all elements - throttled by default
+SkyScroll.recalculate(element); // recalculates only a specific element;
+SkyScroll.recalculate(null, true); // recalculates all elements unthrottled
 ```
 
 ### .redraw()
