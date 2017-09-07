@@ -79,7 +79,7 @@ SkyScroll.untrack(element, specificCallback); // removes specificCallback only o
 ### .recalculate()
 `SkyScroll.recalculate(element[optional], immediate[optional])`
 
-Manually recalculate a specific or all elements currently hooked up to SkyScroll. This function will forcefully call `getBoundingClientRect` and recalculate the absolute position relative to the document top of all elements. This is useful in instances where you are changing the layout of the page elsewhere (accordions opening etc.) and want to recalculate all element dimensions SkyScroll is currently keeping track of.
+Manually recalculate a specific or all elements currently hooked up to SkyScroll. This function will forcefully call `getBoundingClientRect` and recalculate the absolute position relative to the document top of all elements. This is useful in instances where you are changing the layout of the page (after route changes, accordion opens etc.) and want to recalculate all element dimensions SkyScroll is currently keeping track of.
 
 To avoid unescessary overhead this method is throttled by requestAnimationFrame by default (so multiple recalculations aren't triggered simultaneously). If you desire to recalculate immediately and not on the next tick, this behaviour can be overwritten by parsing the `immediate` argument as `true`.
 
