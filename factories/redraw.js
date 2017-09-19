@@ -9,11 +9,7 @@ import { viewport } from './viewport';
  * @return {object} the distance the element has travelled because of user scroll
  */
 const calculateScrolled = (dimensions, view) => {
-	if (dimensions.top <= view.dimensions.height) {
-		return view.scroll.y - dimensions.top - view.dimensions.height;
-	}
-
-	return view.scroll.y - dimensions.top;
+	return view.scroll.y - dimensions.top + view.dimensions.height;
 };
 
 /**
