@@ -62,7 +62,7 @@ const untrack = (element, callback) => {
  */
 const on = (callback) => {
 	track(document.body, callback, {
-		shouldRedraw: () => true,
+		calculateScrolled: (dimensions, view) => view.scroll.y,
 	});
 };
 

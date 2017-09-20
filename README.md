@@ -56,13 +56,17 @@ SkyScroll.track(
     },
     // Config
     {
+        onResize: () => {
+            // Hook to add some custom cleanup before the resize recalculations are fired.
+            // This could be inline styling that conflicts with the recalculations of element dimensions SkyScroll does on resize
+        },
         shouldRedraw: (dimensions, viewport) => {
             // Return boolean for whether or not the callback function should be executed on scroll
             // Default: "fire callback when ANY part of element is visible in the viewport"
         },
-        onResize: () => {
-            // Hook to add some custom cleanup before the resize recalculations are fired.
-            // This could be inline styling that conflicts with the recalculations of element dimensions SkyScroll does on resize
+        calculateScrolled: (dimensions, viewport) => {
+            // Return scrolled value. Use this to override default scrolled if needed.
+            // Default: view.scroll.y - dimensions.top + view.dimensions.height
         },
     });
 ```
