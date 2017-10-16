@@ -4,6 +4,14 @@ import Dimensions from './dimensions';
 import Redraw from './redraw';
 
 /**
+ * window.requestAnimationFrame vendor prefixed where needed
+ */
+const requestAnimationFrame = window.requestAnimationFrame
+	|| window.mozRequestAnimationFrame
+	|| window.webkitRequestAnimationFrame
+	|| window.msRequestAnimationFrame;
+
+/**
  * Helper function to iterate all elements in parsed list and
  * recalculate those.
  *
@@ -46,7 +54,7 @@ export default (element, immediate = false) => {
 
 	if (!recalculatePending && !immediate && !element) {
 		recalculatePending = true;
-		window.requestAnimationFrame(() => {
+		requestAnimationFrame(() => {
 			recalculateItems(recalculateList, viewport);
 			recalculatePending = false;
 		});
