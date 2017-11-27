@@ -1,6 +1,8 @@
-import { trackList, viewport } from './globals';
+import { trackList } from './globals';
+import { viewport } from './viewport';
 import Dimensions from './dimensions';
 import Events from './events';
+import Redraw from './redraw';
 
 /**
  * Function for setting up tracking of and element, with its callback, and
@@ -11,10 +13,6 @@ import Events from './events';
  * @param {object} config: object where custom conditions and behaviour can be inserted.
  */
 const track = (element, callback, config = {}) => {
-	if (trackList.length === 0) {
-		Events.add();
-	}
-
 	const rect = element.getBoundingClientRect();
 
 	trackList.push({
@@ -23,6 +21,11 @@ const track = (element, callback, config = {}) => {
 		callback,
 		config,
 	});
+
+	if (trackList.length === 1) {
+		Events.add();
+	}
+	Redraw();
 };
 
 /**
@@ -59,7 +62,7 @@ const untrack = (element, callback) => {
  */
 const on = (callback) => {
 	track(document.body, callback, {
-		shouldRedraw: () => true,
+		calculateScrolled: (dimensions, view) => view.scroll.y,
 	});
 };
 

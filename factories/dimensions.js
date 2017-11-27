@@ -7,8 +7,8 @@
  */
 
 export default (rect, view) => ({
-	top: rect.top - view.dimensions.height + view.scroll.y,
-	bottom: rect.top + rect.height - view.dimensions.height + view.scroll.y,
+	top: rect.top + view.scroll.y,
+	bottom: rect.top + rect.height + view.scroll.y,
 	height: rect.height,
 	width: rect.width,
 });

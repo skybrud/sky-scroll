@@ -1,3 +1,3 @@
-import SkyScroll from './sky-scroll';
+import SkyScroll from './SkyScroll';
 
 export default SkyScroll;

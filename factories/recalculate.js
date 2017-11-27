@@ -1,5 +1,19 @@
-import { trackList, viewport } from './globals';
+import { trackList, isServer } from './globals';
+import { viewport } from './viewport';
 import Dimensions from './dimensions';
+import Redraw from './redraw';
+
+let requestAnimationFrame = null;
+
+if (!isServer) {
+	/**
+	 * window.requestAnimationFrame vendor prefixed where needed
+	 */
+	requestAnimationFrame = window.requestAnimationFrame
+		|| window.mozRequestAnimationFrame
+		|| window.webkitRequestAnimationFrame
+		|| window.msRequestAnimationFrame;
+}
 
 /**
  * Helper function to iterate all elements in parsed list and
@@ -15,6 +29,7 @@ const recalculateItems = (list, view) => {
 			item.element.getBoundingClientRect(),
 			view);
 	}
+	Redraw(true);
 };
 
 /**
@@ -43,7 +58,7 @@ export default (element, immediate = false) => {
 
 	if (!recalculatePending && !immediate && !element) {
 		recalculatePending = true;
-		window.requestAnimationFrame(() => {
+		requestAnimationFrame(() => {
 			recalculateItems(recalculateList, viewport);
 			recalculatePending = false;
 		});
