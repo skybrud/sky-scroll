@@ -1,15 +1,19 @@
-import { trackList } from './globals';
+import { trackList, isServer } from './globals';
 import { viewport } from './viewport';
 import Dimensions from './dimensions';
 import Redraw from './redraw';
 
-/**
- * window.requestAnimationFrame vendor prefixed where needed
- */
-const requestAnimationFrame = window.requestAnimationFrame
-	|| window.mozRequestAnimationFrame
-	|| window.webkitRequestAnimationFrame
-	|| window.msRequestAnimationFrame;
+let requestAnimationFrame = null;
+
+if (!isServer) {
+	/**
+	 * window.requestAnimationFrame vendor prefixed where needed
+	 */
+	requestAnimationFrame = window.requestAnimationFrame
+		|| window.mozRequestAnimationFrame
+		|| window.webkitRequestAnimationFrame
+		|| window.msRequestAnimationFrame;
+}
 
 /**
  * Helper function to iterate all elements in parsed list and

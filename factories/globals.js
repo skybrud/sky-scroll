@@ -5,7 +5,10 @@ const isServer = typeof window === 'undefined';
  */
 const trackList = [];
 
+const $window = isServer ? {} : window;
+
 export {
 	trackList,
 	isServer,
+	$window,
 };

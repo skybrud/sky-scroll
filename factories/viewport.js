@@ -1,3 +1,4 @@
+import { $window } from './globals';
 import Events from './events';
 
 /**
@@ -15,7 +16,7 @@ const viewport = {
 };
 
 const container = {
-	element: window,
+	element: $window,
 	set(newContainer) {
 		const eventsActive = Events.active();
 		if (eventsActive) {
@@ -27,7 +28,7 @@ const container = {
 		}
 	},
 	calculateScroll() {
-		if (container.element === window) {
+		if (container.element === $window) {
 			viewport.scroll.x = container.element.pageXOffset;
 			viewport.scroll.y = container.element.pageYOffset;
 		} else {
@@ -36,7 +37,7 @@ const container = {
 		}
 	},
 	calculateDimensions() {
-		if (container.element === window) {
+		if (container.element === $window) {
 			viewport.dimensions.width = container.element.innerWidth;
 			viewport.dimensions.height = container.element.innerHeight;
 		} else {
