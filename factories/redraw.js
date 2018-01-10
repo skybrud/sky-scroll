@@ -8,7 +8,8 @@ import { viewport } from './viewport';
  * @param {object} view: object containing window information
  * @return {object} the distance the element has travelled because of user scroll
  */
-const calculateScrolled = (dimensions, view) => view.scroll.y - dimensions.top + view.dimensions.height;
+const calculateScrolled = (dimensions, view) =>
+	view.scroll.y - dimensions.top + view.dimensions.height;
 
 /**
  * Helper factory determining if an element should be redrawn
