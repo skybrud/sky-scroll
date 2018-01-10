@@ -28,6 +28,10 @@ const recalculateItems = (list, view) => {
 		item.dimensions = Dimensions(
 			item.element.getBoundingClientRect(),
 			view);
+
+		if (typeof item.config.afterResize === 'function') {
+			item.config.afterResize(item.dimensions);
+		}
 	}
 	Redraw(true);
 };

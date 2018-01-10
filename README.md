@@ -60,6 +60,9 @@ SkyScroll.track(
             // Hook to add some custom cleanup before the resize recalculations are fired.
             // This could be inline styling that conflicts with the recalculations of element dimensions SkyScroll does on resize
         },
+        afterResize: (dimensions) => {
+            // Do stuff after resize recalculations are done.
+        },
         shouldRedraw: (dimensions, viewport) => {
             // Return boolean for whether or not the callback function should be executed on scroll
             // Default: "fire callback when ANY part of element is visible in the viewport"
