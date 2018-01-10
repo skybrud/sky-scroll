@@ -48,7 +48,7 @@ Track a specific element. After the callback a config object can be provided wit
 SkyScroll.track(
     // Element to track
     element,
-    // Callback function
+    // Callback function (TIP: Skip by setting to null. Useful when you only need onResize for instance)
     (scrolled, dimensions, viewport) => {
         // scrolled: distance the element has travelled due to page scroll
         // dimensions: dimensions of the element

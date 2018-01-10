@@ -32,28 +32,30 @@ const shouldRedraw = (rect, view) => {
 export default (forceAll = false) => {
 	for (let i = trackList.length - 1; i >= 0; i--) {
 		const item = trackList[i];
-		const scrolled = (typeof item.config.calculateScrolled === 'function')
-			? item.config.calculateScrolled(item.dimensions, viewport)
-			: calculateScrolled(item.dimensions, viewport);
-		let initiateCallback = Boolean(forceAll);
+		if (typeof item.callback === 'function') {
+			const scrolled = (typeof item.config.calculateScrolled === 'function')
+				? item.config.calculateScrolled(item.dimensions, viewport)
+				: calculateScrolled(item.dimensions, viewport);
+			let initiateCallback = Boolean(forceAll);
 
-		if (!forceAll) {
-			if (typeof item.config.shouldRedraw !== 'undefined') {
-				if (typeof item.config.shouldRedraw === 'function') {
-					initiateCallback = item.config.shouldRedraw(item.dimensions, viewport);
+			if (!forceAll) {
+				if (typeof item.config.shouldRedraw !== 'undefined') {
+					if (typeof item.config.shouldRedraw === 'function') {
+						initiateCallback = item.config.shouldRedraw(item.dimensions, viewport);
+					} else {
+						initiateCallback = Boolean(item.config.shouldRedraw);
+					}
 				} else {
-					initiateCallback = Boolean(item.config.shouldRedraw);
+					initiateCallback = shouldRedraw(item.dimensions, viewport);
 				}
-			} else {
-				initiateCallback = shouldRedraw(item.dimensions, viewport);
 			}
-		}
 
-		if (initiateCallback) {
-			item.callback(
-				scrolled,
-				item.dimensions,
-				viewport);
+			if (initiateCallback) {
+				item.callback(
+					scrolled,
+					item.dimensions,
+					viewport);
+			}
 		}
 	}
 };
