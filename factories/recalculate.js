@@ -3,16 +3,17 @@ import { viewport } from './viewport';
 import Dimensions from './dimensions';
 import Redraw from './redraw';
 
-let requestAnimationFrame = null;
-
+/**
+ * window.requestAnimationFrame vendor prefixed where needed
+ */
+let rAF = (callback) => {
+	setTimeout(callback, 1000 / 60);
+};
 if (!isServer) {
-	/**
-	 * window.requestAnimationFrame vendor prefixed where needed
-	 */
-	requestAnimationFrame = window.requestAnimationFrame
-		|| window.mozRequestAnimationFrame
-		|| window.webkitRequestAnimationFrame
-		|| window.msRequestAnimationFrame;
+	rAF = window.requestAnimationFrame
+			|| window.mozRequestAnimationFrame
+			|| window.webkitRequestAnimationFrame
+			|| window.msRequestAnimationFrame;
 }
 
 /**
@@ -62,7 +63,7 @@ export default (element, immediate = false) => {
 
 	if (!recalculatePending && !immediate && !element) {
 		recalculatePending = true;
-		requestAnimationFrame(() => {
+		rAF(() => {
 			recalculateItems(recalculateList, viewport);
 			recalculatePending = false;
 		});
