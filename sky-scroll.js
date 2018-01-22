@@ -3,7 +3,7 @@ import { isServer } from './factories/globals';
 import Recalculate from './factories/recalculate';
 import { track, untrack, on, off } from './factories/tracking';
 import Redraw from './factories/redraw';
-import { container } from './factories/viewport';
+import { viewport, container } from './factories/viewport';
 
 /**
  * Service providing automatic custom callbacks on elements while they are in view.
@@ -18,6 +18,7 @@ if (!isServer) {
 }
 
 export default {
+	viewport,
 	on,
 	off,
 	track,

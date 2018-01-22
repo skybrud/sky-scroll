@@ -19,6 +19,8 @@ SkyScroll provides 7 methods that can be used:
 - [`redraw()`](#redraw)
 - [`setContainer()`](#setcontainer)
 
+**New:** SkyScroll also exposes the viewport global object (scroll along X or Y axis + window dimensions) on `SkyScroll.viewport`.
+
 ### .on()
 `SkyScroll.on(callback)`
 
