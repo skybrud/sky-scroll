@@ -21,8 +21,11 @@ const calculateScrolled = (dimensions, view) =>
 const shouldRedraw = (rect, view) => {
 	const startPoint = rect.top - view.dimensions.height;
 	const endPoint = rect.bottom;
+	const justScrolledPast =
+		(view.scroll.lastY < rect.top && view.scroll.y > rect.bottom)
+		|| (view.scroll.lastY > rect.bottom && view.scroll.y < rect.top);
 
-	return view.scroll.y > startPoint && view.scroll.y < endPoint;
+	return justScrolledPast || (view.scroll.y > startPoint && view.scroll.y < endPoint);
 };
 
 /**

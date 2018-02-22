@@ -8,6 +8,8 @@ const viewport = {
 	scroll: {
 		y: null,
 		x: null,
+		lastY: null,
+		lastX: null,
 	},
 	dimensions: {
 		width: null,
@@ -28,6 +30,8 @@ const container = {
 		}
 	},
 	calculateScroll() {
+		viewport.scroll.lastX = viewport.scroll.x;
+		viewport.scroll.lastY = viewport.scroll.y;
 		if (container.element === $window) {
 			viewport.scroll.x = container.element.pageXOffset;
 			viewport.scroll.y = container.element.pageYOffset;
