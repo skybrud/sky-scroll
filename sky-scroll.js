@@ -11,6 +11,8 @@ import { viewport, container } from './factories/viewport';
 
 //Recalc when everything is loaded and only if window exists.
 if (!isServer) {
+	container.calculateDimensions();
+	container.calculateScroll();
 	window.onload = () => {
 		Recalculate();
 	};
