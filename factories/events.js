@@ -9,8 +9,8 @@ import { container } from './viewport';
 const events = [];
 if (!isServer) {
 	events.push({
+		listeners: ['scroll'],
 		target: () => container.element,
-		name: 'scroll',
 		callback: () => {
 			container.calculateScroll();
 			Redraw();
@@ -18,8 +18,8 @@ if (!isServer) {
 	});
 
 	events.push({
+		listeners: ['resize', 'orientationchange'],
 		target: () => window,
-		name: 'resize',
 		callback: () => {
 			container.calculateDimensions();
 
@@ -46,7 +46,9 @@ const add = () => {
 		for (let i = events.length - 1; i >= 0; i--) {
 			const event = events[i];
 
-			event.target().addEventListener(event.name, event.callback);
+			event.listeners.forEach((listener) => {
+				event.target().addEventListener(listener, event.callback);
+			});
 		}
 	}
 };
@@ -59,7 +61,9 @@ const remove = () => {
 		for (let i = events.length - 1; i >= 0; i--) {
 			const event = events[i];
 
-			event.target().removeEventListener(event.name, event.callback);
+			event.listeners.forEach((listener) => {
+				event.target().removeEventListener(listener, event.callback);
+			});
 		}
 	}
 };
