@@ -1,6 +1,6 @@
 {
   "name": "sky-scroll",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Vue plugin for scroll/resize events and calculations",
   "main": "dist/skyscroll.min.js",
   "scripts": {
