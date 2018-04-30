@@ -146,12 +146,9 @@ const SkyScrollPlugin = {
 			$SkyScroll.emit('recalculate');
 		}
 
+		Vue.prototype.$SkyScroll = $SkyScroll;
+
 		Vue.mixin({
-			// data() {
-			// 	return {
-			// 		$dimensions: {},
-			// 	};
-			// },
 			$SkyScroll: {},
 			beforeCreate() {
 				this._skyScroll = {};
