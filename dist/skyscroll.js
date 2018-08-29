@@ -477,15 +477,21 @@ var SkyScrollPlugin = {
 		}
 
 		Vue.mixin({
-			$SkyScroll: {},
+			$SkyScroll: {
+				onMounted: true },
 			beforeCreate: function beforeCreate() {
 				var _this = this;
 
-				this._skyScroll = {};
 				Vue.util.defineReactive(this, '$SkyScroll', $SkyScroll);
 				Vue.util.defineReactive(this, '$scroll', $SkyScroll.scroll);
 				Vue.util.defineReactive(this, '$window', $SkyScroll.window);
-				var dimensions = this.$options.$SkyScroll.dimensions;
+
+				this._skyScroll = {};
+
+				var _$options$$SkyScroll = this.$options.$SkyScroll,
+				    scrollFn = _$options$$SkyScroll.scroll,
+				    resizeFn = _$options$$SkyScroll.resize,
+				    dimensions = _$options$$SkyScroll.dimensions;
 
 				if (dimensions) {
 					this.$dimensions = {
@@ -497,50 +503,66 @@ var SkyScrollPlugin = {
 						height: 0
 					};
 					Vue.util.defineReactive(this, '$dimensions', this.$dimensions);
-					this._skyScroll = {
-						recalculateDimensions: function recalculateDimensions() {
-							var bounds = _this.$el.getBoundingClientRect();
-							var dim = {
-								top: bounds.top + _this.$scroll.y,
-								bottom: bounds.top + _this.$scroll.y,
-								left: bounds.left + _this.$scroll.x,
-								right: bounds.right + _this.$scroll.x,
-								width: bounds.width,
-								height: bounds.height
-							};
-							_this.$set(_this, '$dimensions', dim);
-							return dim;
-						}
+
+					this._skyScroll.recalculateDimensions = function () {
+						var bounds = _this.$el.getBoundingClientRect();
+						var dim = {
+							top: bounds.top + _this.$scroll.y,
+							bottom: bounds.top + _this.$scroll.y,
+							left: bounds.left + _this.$scroll.x,
+							right: bounds.right + _this.$scroll.x,
+							width: bounds.width,
+							height: bounds.height
+						};
+						_this.$set(_this, '$dimensions', dim);
+						return dim;
 					};
-				}
-			},
-			mounted: function mounted() {
-				var _$options$$SkyScroll = this.$options.$SkyScroll,
-				    scrollFn = _$options$$SkyScroll.scroll,
-				    resizeFn = _$options$$SkyScroll.resize,
-				    dimensions = _$options$$SkyScroll.dimensions;
-
-
-				if (dimensions) {
 					this.$SkyScroll.on('resize', this._skyScroll.recalculateDimensions);
-					this._skyScroll.recalculateDimensions();
 				}
 
 				if (typeof scrollFn === 'function') {
-					this.$SkyScroll.on('scroll', scrollFn.bind(this));
-					scrollFn.bind(this)({
-						scroll: this.$SkyScroll.scroll,
-						window: this.$SkyScroll.window,
-						document: this.$SkyScroll.document
-					});
+					this._skyScroll.scrollFn = scrollFn.bind(this);
+					this.$SkyScroll.on('scroll', this._skyScroll.scrollFn);
 				}
+
 				if (typeof resizeFn === 'function') {
-					this.$SkyScroll.on('resize', resizeFn.bind(this));
-					this.$options.$SkyScroll.resize.bind(this)({
-						scroll: this.$SkyScroll.scroll,
-						window: this.$SkyScroll.window,
-						document: this.$SkyScroll.document
-					});
+					this._skyScroll.resizeFn = resizeFn.bind(this);
+					this.$SkyScroll.on('resize', this._skyScroll.resizeFn);
+				}
+			},
+			mounted: function mounted() {
+				if (this.$dimensions) {
+					this._skyScroll.recalculateDimensions();
+				}
+
+				if (this.$options.$SkyScroll.onMounted !== false) {
+					if (typeof this._skyScroll.scrollFn === 'function') {
+						this._skyScroll.scrollFn({
+							scroll: this.$SkyScroll.scroll,
+							window: this.$SkyScroll.window,
+							document: this.$SkyScroll.document
+						});
+					}
+					if (typeof this._skyScroll.resizeFn === 'function') {
+						this.$SkyScroll.on('resize', this._skyScroll.resizeFn);
+						this._skyScroll.resizeFn({
+							scroll: this.$SkyScroll.scroll,
+							window: this.$SkyScroll.window,
+							document: this.$SkyScroll.document
+						});
+					}
+				}
+			},
+			beforeDestroy: function beforeDestroy() {
+				if (this.$dimensions) {
+					this.$SkyScroll.off('resize', this._skyScroll.recalculateDimensions);
+				}
+
+				if (typeof this._skyScroll.scrollFn === 'function') {
+					this.$SkyScroll.off('scroll', this._skyScroll.scrollFn);
+				}
+				if (typeof this._skyScroll.resizeFn === 'function') {
+					this.$SkyScroll.off('resize', this._skyScroll.resizeFn);
 				}
 			}
 		});

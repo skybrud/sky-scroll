@@ -38,7 +38,7 @@ Vue.use(SkyScroll);
 </div>
 ```
 
-**In the component options, scroll and resize callbacks are also available:**
+**In the component $SkyScroll prop, a few options and scroll and resize callbacks are also available:**
 ```js
 export default {
     name: 'ExampleComponent',
@@ -49,6 +49,8 @@ export default {
         // ...
     },
     $SkyScroll: {
+        // scroll [function]
+        // Callback for scroll event
         scroll({ scroll, window, document }) {
             console.log('scroll y', scroll.y);
             console.log('scroll last y', scroll.last.y);
@@ -56,11 +58,22 @@ export default {
             console.log('window width', window.width);
             console.log('document height', document.height);
         },
+        // resize [function]
+        // Callback for resize event
         resize({ scroll, window, document }) {
             console.log('scroll x', scroll.x);
             console.log('window width', window.width);
             console.log('document height', document.height);
         },
+        // onMounted [boolean] - default: true
+        // If true scroll and resize callbacks a executed on component mount
+        onMounted: true.
+        // dimensions [boolean] - default: false
+        // Determines if SkyScroll should keep track of $el dimensions. If true
+        // this.$dimensions will be added to the instance, which holds the
+        // boundingClientRect of this.$el - and automatically keeps it up to
+        // date on resize.
+        dimensions: false,
     },
 };
 ```
