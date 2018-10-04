@@ -3,7 +3,6 @@ const PackageJson = require('./package.json');
 const path = require('path');
 
 module.exports = SkyBuildSetup(
-	PackageJson.name,
-	PackageJson.build,
+	PackageJson,
 	path.resolve(__dirname)
 );

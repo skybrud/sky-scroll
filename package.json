@@ -1,28 +1,27 @@
 {
-  "name": "sky-scroll",
-  "version": "0.1.0",
-  "description": "A Vue plugin for scroll/resize events and calculations",
-  "main": "dist/skyscroll.min.js",
-  "scripts": {
-    "build": "rimraf ./dist && webpack --config ./webpack.config.js",
-    "dist": "yarn install && yarn run build",
-    "update": "rimraf ./node_modules && yarn run dist"
-  },
-  "build": "plugin",
-  "author": "Skybrud.dk",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/skybrud/sky-scroll.git"
-  },
-  "dependencies": {
-    "lodash.throttle": "^4.1.1"
-  },
-  "devDependencies": {
-    "np": "*",
-    "sky-build-setup": "https://github.com/skybrud/sky-build-setup.git#^1.0.0"
-  },
-  "peerDependencies": {
-    "vue": "^2.5.0"
-  }
+	"name": "sky-scroll",
+	"version": "0.1.0",
+	"description": "A Vue plugin for scroll/resize events and calculations",
+	"main": "./dist/sky-scroll.ssr.js",
+	"module": "./dist/sky-scroll.esm.js",
+	"browser": "./dist/sky-scroll.esm.js",
+	"scripts": {
+		"dist": "yarn rimraf dist && yarn run build",
+		"build": "yarn rollup --config rollup.config.js --environment BUILD:production"
+	},
+	"author": "Skybrud.dk",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/skybrud/sky-scroll.git"
+	},
+	"dependencies": {
+		"lodash.throttle": "^4.1.1"
+	},
+	"devDependencies": {
+		"sky-build-setup": "https://github.com/skybrud/sky-build-setup.git"
+	},
+	"peerDependencies": {
+		"vue": "^2.5.0"
+	}
 }
